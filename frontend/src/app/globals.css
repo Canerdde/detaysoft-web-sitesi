@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  --background: linear-gradient(135deg, #eff6ff, #f8fafc, #f3f4f6); /* blue-50, slate-50, gray-100 gradient */
+  --foreground: #171717;
+  
+  /* Scrollbar Colors */
+  --scrollbar-thumb: #3b82f6; /* blue-500 */
+  --scrollbar-thumb-hover: #2563eb; /* blue-600 */
+  --scrollbar-track: rgba(219, 234, 254, 0.3); /* blue-100 with transparency */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    
+    /* Dark Scrollbar Colors */
+    --scrollbar-thumb: #1d4ed8; /* blue-700 */
+    --scrollbar-thumb-hover: #1e40af; /* blue-800 */
+    --scrollbar-track: rgba(30, 58, 138, 0.2); /* blue-900 with transparency */
+  }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--scrollbar-thumb), #6366f1);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--scrollbar-thumb-hover), #4f46e5);
+  background-clip: content-box;
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+html, body {
+  background: linear-gradient(135deg, #eff6ff, #f8fafc, #f3f4f6); /* blue-50, slate-50, gray-100 gradient */
+  background-attachment: fixed; /* Gradient sabitlenir, kaydırma ile hareket etmez */
+}
+
+/* Arka plan deseni - karolama */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: 
+    linear-gradient(45deg, #dbeafe 25%, transparent 25%), 
+    linear-gradient(-45deg, #dbeafe 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #dbeafe 75%),
+    linear-gradient(-45deg, transparent 75%, #dbeafe 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  opacity: 0.3; /* Daha belirgin olması için opacity artırıldı */
+}
+
+/* Diagonal çizgiler */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #dbeafe,
+    #dbeafe 2px, /* Çizgi kalınlığı artırıldı */
+    transparent 2px,
+    transparent 30px
+  );
+  opacity: 0.15; /* Daha belirgin olması için opacity artırıldı */
+}
+
+/* Daire desenleri */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-image: 
+    radial-gradient(circle at 20% 30%, #bfdbfe 0%, #bfdbfe 1%, transparent 2%), 
+    radial-gradient(circle at 80% 70%, #bfdbfe 0%, #bfdbfe 1%, transparent 2%),
+    radial-gradient(circle at 60% 20%, #bfdbfe 0%, #bfdbfe 1%, transparent 3%),
+    radial-gradient(circle at 40% 80%, #bfdbfe 0%, #bfdbfe 1%, transparent 3%);
+  background-size: 60px 60px;
+  opacity: 0.3;
+}
+
+/* Ayırıcılar için ek stiller */
+.section-separator {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eff6ff, #f8fafc, #f3f4f6); /* blue-50, slate-50, gray-100 gradient */
+}
+
+.section-separator::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, #bfdbfe, transparent 10%, transparent 90%, #bfdbfe),
+    linear-gradient(to bottom, #bfdbfe, transparent 20%, transparent 80%, #bfdbfe);
+  opacity: 0.2;
+}
+
+.section-separator::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 12px;
+  background-image: 
+    linear-gradient(45deg, transparent 33.333%, #bfdbfe 33.333%, #bfdbfe 50%, transparent 50%, transparent 83.333%, #bfdbfe 83.333%, #bfdbfe 100%);
+  background-size: 24px 24px;
+  opacity: 0.2;
+}
+
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
